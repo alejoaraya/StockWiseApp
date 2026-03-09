@@ -1,4 +1,5 @@
 import { httpClient } from '@/utils/';
+import { mockProveedores } from '@/data';
 
 const path = '/proveedores';
 
@@ -12,7 +13,7 @@ export function serviceCreateProvider(newProvider) {
   });
 }
 
-// READ
+/* // READ
 export function serviceGetAllProviders() {
   return new Promise((resolve, reject) => {
     httpClient
@@ -21,7 +22,15 @@ export function serviceGetAllProviders() {
       .catch(error => reject(new Error(error)));
   });
 }
+ */
 
+
+
+export function serviceGetAllProviders() {
+  return new Promise(resolve => {
+    setTimeout(() => resolve(mockProveedores), 150);
+  });
+}
 export function serviceGetProvider(id) {
   return new Promise((resolve, reject) => {
     httpClient

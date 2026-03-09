@@ -39,10 +39,11 @@ export function AuthProvider({ children }) {
       dispatch({ type: authActions.LOADING, payload: true });
 
       const userApi = userToUserApi(newUser);
-      await serviceSignUp(userApi);
-      dispatch({ type: authActions.CREATE, payload: userApiToUser(userApi) });
-      // login after register
-      onLogin(userApiToUser(userApi));
+      const createdUserApi = await serviceSignUp(userApi);
+      const createdUser = userApiToUser(createdUserApi);
+
+      dispatch({ type: authActions.CREATE, payload: createdUser });
+      onLogin(createdUser);
     } catch (error) {
       dispatch({ type: authActions.ERROR, payload: 'Error de registro' });
     } finally {

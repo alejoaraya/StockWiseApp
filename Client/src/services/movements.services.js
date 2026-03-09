@@ -1,8 +1,15 @@
-import { httpClient } from '@/utils/';
+/* import { httpClient } from '@/utils/'; */
+import { mockMovimientos } from '@/data';
 
-const path = '/movimientos';
+/* const path = '/movimientos'; */
 
-// READ
+
+export function serviceGetAllMovements() {
+  return new Promise(resolve => {
+    setTimeout(() => resolve(mockMovimientos), 150);
+  });
+}
+/* // READ
 export function serviceGetAllMovements() {
   return new Promise((resolve, reject) => {
     httpClient
@@ -10,4 +17,4 @@ export function serviceGetAllMovements() {
       .then(({ data }) => resolve(data))
       .catch(error => reject(new Error(error)));
   });
-}
+} */
