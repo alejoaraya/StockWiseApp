@@ -59,7 +59,7 @@ export function serviceDeleteBrand(id) {
 }
  */
 
-import { mockMarcas } from '@/data';
+import { mockMarcas, mockProductos } from '@/data';
 
 
 
@@ -176,6 +176,13 @@ export function serviceDeleteBrand(id) {
         item => Number(item.id) === Number(id)
       );
 
+
+      const isAssignedToProduct = mockProductos.filter(p => p.category.nombre === mockMarcas[index]) > 0
+
+      if (isAssignedToProduct) {
+        reject(new Error('Marca asginada en producto'));
+        return;
+      }
       if (index === -1) {
         reject(new Error('Marca no encontrada'));
         return;

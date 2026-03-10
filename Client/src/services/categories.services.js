@@ -59,7 +59,7 @@ export function serviceDeleteCategory(id) {
   });
 }
  */
-import { mockCategorias } from '@/data';
+import { mockCategorias, mockProductos } from '@/data';
 
 /* const path = '/categorias';
  */
@@ -179,6 +179,12 @@ export function serviceDeleteCategory(id) {
         item => Number(item.id) === Number(id)
       );
 
+      const isAssignedToProduct = mockProductos.filter(p => p.category.nombre === mockCategorias[index]) > 0
+
+      if (isAssignedToProduct) {
+        reject(new Error('Categoría asginada en producto'));
+        return;
+      }
       if (index === -1) {
         reject(new Error('Categoría no encontrada'));
         return;

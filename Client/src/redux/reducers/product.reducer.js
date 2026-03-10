@@ -9,6 +9,8 @@ import {
   serviceSubtractStock,
 } from '@/services';
 
+import { mockCategorias, mockMarcas, mockProveedores } from '@/data';
+
 export const getAllProductsAsync = createAsyncThunk(
   'products/getAll',
   async () => {
@@ -25,7 +27,23 @@ export const getProductAsync = createAsyncThunk('products/getOne', async () => {
 export const createProductAsync = createAsyncThunk(
   'products/createProduct',
   async newProduct => {
-    const response = await serviceCreateProduct(newProduct);
+
+
+    const payload = {
+      categoria: mockCategorias.find((c) => c.nombre === newProduct.categoria),
+      marca: mockMarcas.find((m) => m.nombre === newProduct.marca),
+      proveedor: mockProveedores.find((s) => s.email === newProduct.proveedor),
+      actual: 0,
+      costo: newProduct.costo,
+      fechaVencimiento: newProduct.fechaVencimiento,
+      imagen: newProduct.imagen,
+      max: newProduct.max,
+      min: newProduct.min,
+      nombre: newProduct.nombre,
+      slogan: newProduct.slogan,
+    }
+
+    const response = await serviceCreateProduct(payload);
     return response;
   }
 );
@@ -33,7 +51,20 @@ export const createProductAsync = createAsyncThunk(
 export const updateProductAsync = createAsyncThunk(
   'products/updateProduct',
   async productModified => {
-    const response = await serviceUpdateProduct(productModified);
+    const payload = {
+      categoria: mockCategorias.find((c) => c.nombre === productModified.categoria),
+      marca: mockMarcas.find((m) => m.nombre === productModified.marca),
+      proveedor: mockProveedores.find((s) => s.email === productModified.proveedor),
+      actual: productModified.actual,
+      costo: productModified.costo,
+      fechaVencimiento: productModified.fechaVencimiento,
+      imagen: productModified.imagen,
+      max: productModified.max,
+      min: productModified.min,
+      nombre: productModified.nombre,
+      id: productModified.id,
+    }
+    const response = await serviceUpdateProduct(payload);
     return response;
   }
 );
