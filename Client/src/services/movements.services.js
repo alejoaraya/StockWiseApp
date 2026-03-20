@@ -9,6 +9,12 @@ export function serviceGetAllMovements() {
     setTimeout(() => resolve(mockMovimientos), 150);
   });
 }
+export function addMovement() {
+  return new Promise(resolve => {
+    setTimeout(() => resolve(mockMovimientos), 150);
+  });
+}
+
 /* // READ
 export function serviceGetAllMovements() {
   return new Promise((resolve, reject) => {

@@ -1,12 +1,21 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import {
   serviceGetAllMovements,
+
 } from '@/services';
 
 export const getAllMovementsAsync = createAsyncThunk(
   'movements/getAll',
   async () => {
     const response = await serviceGetAllMovements();
+    return response;
+  }
+);
+
+export const addMovementAsync = createAsyncThunk(
+  'movements/addMovement',
+  async () => {
+    const response = await addMovement();
     return response;
   }
 );

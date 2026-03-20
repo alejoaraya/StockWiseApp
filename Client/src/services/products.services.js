@@ -97,6 +97,7 @@ export function serviceSubtractStock(arr) {
 
 
 import { mockProductos } from '@/data';
+import { addMovement } from '../redux/reducers/movements.reducer';
 
 
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
@@ -269,8 +270,19 @@ export function serviceAddStock(arr) {
         };
 
         updatedProducts.push({ ...mockProductos[index] });
-      }
 
+
+        addMovement({
+
+          payload: {
+            id: crypto.randomUUID(),
+            fecha_asiento: new Date(),
+            cantidad: item.actual,
+            tipo: 'ENTRADA',
+            descripcion: 'Ingreso de ' + mockProductos[index].nombre,
+          }
+        })
+      }
       resolve(updatedProducts);
     } catch (error) {
       reject(error);
